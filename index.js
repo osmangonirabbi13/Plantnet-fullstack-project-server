@@ -87,7 +87,11 @@ async function run() {
       const result = await plantsCollection.find().toArray();
       res.send(result);
     });
-
+    // get a single plant data from db
+    app.get("/plant", async (req, res) => {
+      const id = req.params.id;
+      const result = await plantsCollection.findOne({ _id: new ObjectId(id) });
+    });
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
